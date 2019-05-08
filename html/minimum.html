@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Adding map legend</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="css/leaflet.css">
+    <script src="js/leaflet.js"></script>
+    <script src="js/jquery.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+        .popup {
+            text-align: center;
+        } 
+
+
+    </style>
+</head>
+<body>
+	<div id="map"></div>
+	<script>
+
+var map = L.map("map").setView([32, 35], 8);
+
+L.tileLayer("https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png", {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attribution/">CartoDB</a>',
+	subdomains: "abcd",
+	maxZoom: 19
+}).addTo(map);
+
+var geojson;
+
+function getColor(d) {
+    if(d ==  "Yes" ) return "#b30000"; else
+    if(d ==  "No" ) return "#e34a33"; else
+
+        return "#fef0d9";
+}
+
+
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.Power_Outlet),
+        radius: 10,
+        weight: 0.5,
+        opacity: 1,
+        color: "black",
+        fillOpacity: 0.7
+    };
+
+}
+
+$.getJSON("data/CAMP_heb.geojson", function(data) {
+    geojson = L.geoJSON(data, {
+	    onEachFeature: function(feature, layer) {
+            layer.bindPopup(
+                '<div class="popup">' + 
+                feature.properties.Name + '<br>' + 
+                '<b>' + feature.properties.FullDescription + '</b>' + 
+                '</div>'
+            );
+        },
+        style: style
+    }).addTo(map);
+    
+});
+
+
+
+	</script>
+</body>
+</html>
+

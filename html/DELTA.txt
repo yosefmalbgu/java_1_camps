@@ -1,0 +1,92 @@
+in stye::::
+
+"""		
+        .legend {
+	        padding: 6px 8px;
+	        background-color: rgba(255,255,255,0.8);
+	        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	        border-radius: 5px;
+        }
+        .legend i {
+	        width: 18px;
+	        height: 18px;
+	        float: left;
+	        margin-right: 8px;
+	        opacity: 0.7;
+        }
+        div.legend.leaflet-control br {
+            clear: both;
+        }
+		
+"""
+
+
+----------------------------------------------------------------
+
+
+
+// Create Leaflet control object for legend
+var legend = L.control({position: "topright"});
+
+// Function that runs when legend is added to map
+legend.onAdd = function(map) {
+
+	// Create <div> element and populate it with HTML
+	var div = L.DomUtil.create("div", "legend");	    
+	div.innerHTML = '<b>Population in 2015</b><br>' +
+      	'by Town<br>' +
+      	'<small>Persons/Town</small><br>' +
+      	'<i style="background-color: #b30000">' + 
+      	'</i>2090+<br>' +
+      	'<i style="background-color: #e34a33">' + 
+      	'</i>933 - 2090<br>' +
+      	'<i style="background-color: #fc8d59">' + 
+      	'</i>642 - 933<br>' +
+      	'<i style="background-color: #fdcc8a">' + 
+      	'</i>399 - 642<br>' +
+      	'<i style="background-color: #fef0d9">' + 
+      	'</i>0 - 399<br>';
+
+	// Return the legend <div> containing the HTML content
+	return div;
+};
+
+// Add Legend to Map
+legend.addTo(map);
+
+
+
+---------------------------------------------
+
+in body:::
+
+// Create Leaflet control object for legend
+var legend = L.control({position: "topright"});
+
+// Function that runs when legend is added to map
+legend.onAdd = function(map) {
+
+	// Create <div> element and populate it with HTML
+	var div = L.DomUtil.create("div", "legend");	    
+	div.innerHTML = '<b>Population in 2015</b><br>' +
+      	'by Town<br>' +
+      	'<small>Persons/Town</small><br>' +
+      	'<i style="background-color: #b30000">' + 
+      	'</i>2090+<br>' +
+      	'<i style="background-color: #e34a33">' + 
+      	'</i>933 - 2090<br>' +
+      	'<i style="background-color: #fc8d59">' + 
+      	'</i>642 - 933<br>' +
+      	'<i style="background-color: #fdcc8a">' + 
+      	'</i>399 - 642<br>' +
+      	'<i style="background-color: #fef0d9">' + 
+      	'</i>0 - 399<br>';
+
+	// Return the legend <div> containing the HTML content
+	return div;
+};
+
+// Add Legend to Map
+legend.addTo(map);
+
+----------------------------------
